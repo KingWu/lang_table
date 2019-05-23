@@ -1,0 +1,10 @@
+{
+	"genderMessageFemale":"你好 ${name}，她是女。",
+	"genderMessageGOther":"你好 ${name}，他/她是男/女。",
+	"genderMessageMale":"你好 ${name}，他是男。",
+	"locale":"中文",
+	"messageWithParams":"你好 ${yourName}，歡迎你。",
+	"pluralMessageOne":"你好 ${interviewerName}，我沒有工作經驗。",
+	"pluralMessagePOther":"你好 ${interviewerName}，我有${howMany}年工作經驗。",
+	"simpleMessage":"這是簡單消息"
+}
