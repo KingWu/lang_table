@@ -22,11 +22,6 @@ class JsonBuilder{
     jsonKeyHeader = _pullJsonKeyHeaderFromList(allHeaders);
     localeMessageHeaderList = allHeaders;
     _buildLocaleMap();
-
-    printInfo(jsonKeyHeader.toString());
-    printInfo(localeFileNameMap.toString());
-    printInfo(localeStringBuilderMap.toString());
-
     return isInitialized();
   }
 
@@ -89,9 +84,6 @@ class JsonBuilder{
 
   void _buildLocaleMap(){
    for(ExtractedHeader localeHeader in localeMessageHeaderList){
-     printInfo('------ _buildLocaleMap -----');
-     printInfo('localeHeader.header: ${localeHeader.header}');
-
      isLocaleFirstWriteMap[localeHeader.header] = true;
      localeFileNameMap[localeHeader.header] = 'string_${localeHeader.code}.json';
      StringBuffer localeBuffer = StringBuffer();

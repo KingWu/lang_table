@@ -25,18 +25,17 @@ class AirTableGenerator implements PlatformGenerator {
     do{
       var offsetParama = '';
       if(null != offset){
-        offsetParama = '&offset=${offset}';
+        offsetParama = '?offset=${offset}';
       }
 
-      var response = await http.get('${config.input}?sort%5B0%5D%5Bfield%5D=JSON%20Key%20%5Bcode%3Dkey%5D&sort%5B0%5D%5Bdirection%5D=asc${offsetParama}', headers: headers);
-      printInfo('Request failed with status: ${response.statusCode}');
+      var response = await http.get('${config.input}${offsetParama}', headers: headers);
 
       if (response.statusCode == 200) {
         var jsonResponse = jsonDecode(response.body);
-        printInfo('jsonResponse: ${jsonResponse.toString()}');
 
         offset = jsonResponse['offset'];
         List<dynamic> records = jsonResponse['records'];
+
         if(records.length > 0){
           if(!jsonBuilder.isInitialized()){
             bool isSuccess = jsonBuilder.initialize(extractHeaderList(records[1]));
@@ -61,6 +60,7 @@ class AirTableGenerator implements PlatformGenerator {
     if(!isError){
       // Generate Code
       jsonBuilder.generateFiles(config.outputDir);
+      printInfo('Success to generate files');
     }
   }
 
@@ -78,7 +78,6 @@ class AirTableGenerator implements PlatformGenerator {
 
   List<ExtractedHeader> extractHeaderList(record){
     List<ExtractedHeader> headers = [];
-    printInfo(record.toString());
 
     Map<String, dynamic> fields = record['fields'];
     for(String jsonKey in fields.keys){
@@ -100,17 +99,10 @@ class AirTableGenerator implements PlatformGenerator {
         continue;
       }
 
-      printInfo('--------');
-      printInfo(fields.toString());
-
-
       String jsonKey = fields[jsonKeyHeader];
-
-      printInfo('jsonKey: $jsonKey');
 
       for(ExtractedHeader localeHeader in localeHeaderList){
         String message = fields[localeHeader.header];
-        printInfo('message: $message');
 
         if(null != message){
           jsonBuilder.writeData(jsonKey, localeHeader.header, message);
