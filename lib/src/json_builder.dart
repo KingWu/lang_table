@@ -5,6 +5,7 @@ import 'dart:io';
 import 'package:lang_table/src/extra_key_value.dart';
 import 'package:lang_table/src/print_tool.dart';
 import 'package:path/path.dart' as path;
+import 'dart:convert' show json;
 
 class JsonBuilder{
   List<ExtractedHeader> localeMessageHeaderList = [];
@@ -13,8 +14,8 @@ class JsonBuilder{
   // <Header, FileName>
   Map<String, String> localeFileNameMap = {};
 
-  // <Header, StringBuffer>
-  Map<String, StringBuffer> localeStringBuilderMap = {};
+  // <Header, Map>
+  Map<String, Map> localeStringBuilderMap = {};
 
   Map<String, bool> isLocaleFirstWriteMap = {};
 
@@ -40,16 +41,23 @@ class JsonBuilder{
   }
 
   void writeData(String jsonKey, String localeHeader, String message){
-    StringBuffer localeBuilder = localeStringBuilderMap[localeHeader];
+    Map localeBuilder = localeStringBuilderMap[localeHeader];
     if(null != localeBuilder){
-      bool isFirstWrite = isLocaleFirstWriteMap[localeHeader];
-      if(isFirstWrite){
-        isLocaleFirstWriteMap[localeHeader] = false;
+      List<String> keys = jsonKey.split(".");
+      Map root = localeBuilder;
+      int lastIndex = keys.length - 1;
+      for(int i = 0 ; i < keys.length ; i++) {
+        String key = keys[i];
+        if(i != lastIndex) {
+          if(null == root[key]) {
+            root[key] = {};
+          }
+          root = root[key];
+        }
+        else {
+          root[key] = message;
+        }
       }
-      else{
-        localeBuilder.writeln(',');
-      }
-      localeBuilder.write('\t"$jsonKey":"$message"');
     }
   }
 
@@ -63,12 +71,9 @@ class JsonBuilder{
         generatedFile.createSync(recursive: true);
       }
 
-      StringBuffer localeBuilder = localeStringBuilderMap[fileEntry.key];
-      localeBuilder.writeln('');
-      localeBuilder.write('}');
-
+      Map localeBuilder = localeStringBuilderMap[fileEntry.key];
       // Generate File
-      generatedFile.writeAsStringSync(localeBuilder.toString());
+      generatedFile.writeAsStringSync(json.encode(localeBuilder));
     }
   }
 
@@ -86,9 +91,7 @@ class JsonBuilder{
    for(ExtractedHeader localeHeader in localeMessageHeaderList){
      isLocaleFirstWriteMap[localeHeader.header] = true;
      localeFileNameMap[localeHeader.header] = 'string_${localeHeader.code}.json';
-     StringBuffer localeBuffer = StringBuffer();
-     localeBuffer.writeln("{");
-     localeStringBuilderMap[localeHeader.header] = localeBuffer;
+     localeStringBuilderMap[localeHeader.header] = {};
    }
   }
 }

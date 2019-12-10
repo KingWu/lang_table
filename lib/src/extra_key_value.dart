@@ -1,6 +1,6 @@
 library extra_key_value;
 
-RegExp CODE_REG_EXP = RegExp(r'\[code=\w+]');
+RegExp CODE_REG_EXP = RegExp(r'\[code=.*]');
 
 enum ContentType {
   none,
