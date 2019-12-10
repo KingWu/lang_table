@@ -1,4 +1,4 @@
-library base_platform_generator;
+library lang_table;
 
 import 'package:lang_table/src/generator/airtable_generator.dart';
 

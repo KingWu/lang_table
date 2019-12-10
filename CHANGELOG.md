@@ -1,3 +1,9 @@
+## 0.2.0
+
+Features
+---
+* Support grouping key
+
 ## 0.1.1
 
 Fix 

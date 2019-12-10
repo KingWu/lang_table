@@ -1,6 +1,6 @@
 library airtable_generator;
 
-import 'package:lang_table/base_platform_generator.dart';
+import 'package:lang_table/lang_table.dart';
 import 'package:lang_table/src/extra_key_value.dart';
 import 'package:lang_table/src/print_tool.dart';
 
