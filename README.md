@@ -10,7 +10,7 @@ Add this library into pubspec.yaml
 
 ``` 
 dev_dependencies: 
-    lang_table: 0.1.0
+    lang_table: 0.2.0
 ```
 ## Usage
 
@@ -38,6 +38,7 @@ A below table shown all supported arguments:
 | locale | English | 中文 | 日文  |
 | simpleMessage  | This is a simple Message | 這是簡單消息 | これは簡単なメッセージです  |
 | messageWithParams    |  Hi ${yourName}, Welcome you!   |  你好 ${yourName}，歡迎你。   |  こんにちは${yourName}、ようこそ。   |
+| group.hello    |  Welcome you!   |  歡迎你。   |  ようこそ。   |
 
 [Example Template on AirTable](https://airtable.com/shrJfZ4HlC9cjdVkk/tbl18JnO2rIR07ITN/viwzo7m3yHY73c9kp?blocks=hide)
 
@@ -66,6 +67,16 @@ a table's column.
 | `[code=key]`  | Used to identify the column storing a key for a message |
 |-----|-----|
 | `[code={Locale}]` | Used to identify the column storing a message for a specific language |
+
+### Grouping Key
+For the key in `[code=key]`, lang_table support group key. Using `'.'` to separate different groups
+
+eg.
+```
+{
+    "group.hello": "Welcome you!" 
+}
+```
 
 ## Supported Platforms
 

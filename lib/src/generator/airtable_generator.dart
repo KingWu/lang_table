@@ -102,7 +102,10 @@ class AirTableGenerator implements PlatformGenerator {
       String jsonKey = fields[jsonKeyHeader];
 
       for(ExtractedHeader localeHeader in localeHeaderList){
-        String message = fields[localeHeader.header];
+        dynamic message = fields[localeHeader.header];
+        if( message is List ) {
+          message = message[0];
+        }
 
         if(null != message){
           jsonBuilder.writeData(jsonKey, localeHeader.header, message);
