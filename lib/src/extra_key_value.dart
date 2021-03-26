@@ -2,17 +2,12 @@ library extra_key_value;
 
 RegExp CODE_REG_EXP = RegExp(r'\[code=.*]');
 
-enum ContentType {
-  none,
-  key,
-  value
-}
+enum ContentType { none, key, value }
 
 class ExtractedHeader {
   ContentType type;
   String header;
-  String code;
-
+  String? code;
 
   ExtractedHeader(this.type, this.header, this.code);
 
@@ -22,18 +17,16 @@ class ExtractedHeader {
   }
 }
 
-ExtractedHeader convertToExtractedHeader(String header){
-  Match match = CODE_REG_EXP.firstMatch(header);
-  if(null == match){
+ExtractedHeader convertToExtractedHeader(String header) {
+  Match? match = CODE_REG_EXP.firstMatch(header);
+  if (null == match) {
     return ExtractedHeader(ContentType.none, header, null);
   }
 
   String code = header.substring(match.start + 6, match.end - 1);
-  if(code == 'key'){
+  if (code == 'key') {
     return ExtractedHeader(ContentType.key, header, null);
   }
 
   return ExtractedHeader(ContentType.value, header, code);
 }
-
-
