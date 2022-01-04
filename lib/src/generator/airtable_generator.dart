@@ -28,7 +28,8 @@ class AirTableGenerator implements PlatformGenerator {
         offsetParama = '?offset=${offset}';
       }
 
-      var response = await http.get('${config.input}${offsetParama}', headers: headers);
+      var response = await http.get(Uri.parse('${config.input}${offsetParama}'),
+          headers: headers);
 
       if (response.statusCode == 200) {
         var jsonResponse = jsonDecode(response.body);
