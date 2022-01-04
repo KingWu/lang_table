@@ -1,3 +1,6 @@
+## 1.0.0
+* Migrate to null safety
+* Update dependencies
 ## 0.2.0
 
 Features

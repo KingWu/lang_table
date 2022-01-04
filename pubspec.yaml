@@ -3,7 +3,7 @@ description: >-
   lang_table is a dart plugin to generate string files from a source. Use
   a table to manage all multi-language resources.
 
-version: 0.2.0
+version: 1.0.0
 homepage: https://github.com/KingWu/lang_table
 
 environment:
