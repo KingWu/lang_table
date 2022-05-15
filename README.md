@@ -87,4 +87,7 @@ Example
 pub run lang_table:generate --platform=airTable --input=https://api.airtable.com/v0/appZmh0WMg3y6APAg/example --api-key={YOUR API KEY} --target=Flutter
 ```
 
+# Powered By 
+- [Plaker Lab 創玩坊](https://plakerlab.com/)
+- [Wenjetso 搵著數](https://www.wenjetso.com/zh_HK/)
 
