@@ -88,6 +88,6 @@ pub run lang_table:generate --platform=airTable --input=https://api.airtable.com
 ```
 
 # Powered By 
-- [Plaker Lab 創玩坊](https://plakerlab.com/)
+- [Plaker Lab 創玩坊](https://www.plakerlab.com/)
 - [Wenjetso 搵著數](https://www.wenjetso.com/zh_HK/)
 
