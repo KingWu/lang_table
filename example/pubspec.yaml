@@ -3,7 +3,7 @@ description: Demonstrates how to use the lang_table plugin.
 publish_to: 'none'
 
 environment:
-  sdk: ">=2.0.0-dev.68.0 <3.0.0"
+  sdk: '>=2.12.0 <3.0.0'
 
 dependencies:
   flutter:
@@ -15,22 +15,23 @@ dependencies:
   flutter_localizations:
     sdk: flutter
 
-
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  gen_lang: 0.1.0
+  # Waiting for this PR https://bit.ly/3tO37NG
+  gen_lang:
+    git:
+      url: https://github.com/KingWu/gen_lang
+      ref: 7ba7548
   lang_table:
     path: ../
-
 
 # For information on the generic Dart part of this file, see the
 # following page: https://www.dartlang.org/tools/pub/pubspec
 
 # The following section is specific to Flutter.
 flutter:
-
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
